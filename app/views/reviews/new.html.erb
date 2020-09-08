@@ -1,0 +1,8 @@
+口コミ投稿
+<%= form_with(model: @review, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.text_area :content, class: 'form-control', rows: 5 %>
+      <%= f.hidden_field :device_id, :value => params[:device_id] %>
+    </div>
+    <%= f.submit 'Review', class: 'btn btn-primary btn-block' %>
+<% end %>

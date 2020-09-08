@@ -6,5 +6,11 @@ Rails.application.routes.draw do
  delete 'logout', to: 'sessions#destroy'
   
  get 'signup', to: 'users#new'
+ 
+ get 'devices/:id/review', to: 'reviews#new'
+ 
+ resources :devices
  resources :users
+ resources :reviews
+ 
 end

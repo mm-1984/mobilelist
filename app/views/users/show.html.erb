@@ -2,12 +2,23 @@
   <aside class="col-sm-4">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
+        <h3 class="card-title">id:<%= @user.id %> <%= @user.name %></h3>
       </div>
       <div class="card-body">
         <img class="rounded img-fluid" src="" alt="">
+        
+      <% if @user.image? %>  
+       <%= image_tag @user.image.url %>
+       <% else %>
+       <image src="/assets/default.png" class="rounded img-fluid" alt="ユーザーアイコン" >
+       <% end %>
+       
       </div>
     </div>
+    <ul class="list-unstyled">
+      <li><%= link_to 'ユーザー情報を編集', edit_user_path(@user) %></li>
+      <li><%= link_to 'ユーザー情報を削除', @user, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }  %></li>
+    </ul>
   </aside>
   <div class="col-sm-8">
     <ul class="nav nav-tabs nav-justified mb-3">
