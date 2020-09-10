@@ -1,13 +1,9 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :edit, :update, :destroy]
-
-  def index
-    @users = User.order(id: :desc).page(params[:page]).per(5)
-  end
-
+  before_action :require_user_logged_in, only: [:edit, :update, :destroy]
+  before_action :user_find, only: [:show, :edit, :update, :destroy, :likes]
+  before_action :correct_user?, only: [:edit, :update, :destroy]
+  
   def show
-    @user = User.find(params[:id])
-    
     @devices = @user.likes
   end
 
@@ -28,12 +24,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
-
     if @user.update(user_params)
       flash[:success] = 'ユーザー情報は正常に更新されました'
       redirect_to @user
@@ -44,7 +37,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     
     flash[:success] = 'ユーザー登録を削除しました'
@@ -52,7 +44,6 @@ class UsersController < ApplicationController
   end
   
   def likes
-    @user = User.find(params[:id])
     @devices = @user.likes
   end
   
@@ -62,4 +53,14 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
   end
   
+  def user_find
+    @user = User.find(params[:id])
+  end
+  
+  def correct_user
+    @user = current_user.microposts.find_by(id: params[:id])
+    unless @micropost
+      redirect_to root_url
+    end
+  end
 end

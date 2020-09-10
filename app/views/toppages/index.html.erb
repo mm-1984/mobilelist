@@ -1,46 +1,44 @@
 
-<div class="center jumbotron">
-  <div class="text-center">
-    <h1>Welcome to the Mobilelist</h1>
-  </div>
-</div>
-<h1>いいね！ランキング</h1>
-
-<div>
-  <ul class="list-unstyled">
+<div class="ranking-wrapper">
+  <h1>いいね！ランキング</h1>
+  <ul class="list-unstyled ranking">
     <% @ranking.each.with_index(1) do |device, i| %>
-      <li>
-        No.<%= i %>
+      <li class="ranker">
+        <div class="number">No.<%= i %></div>
+      <%= link_to(device) do %>
         <% if device.image? %>  
-         <%= image_tag device.image.url, :size => '75x125' %>
+         <%= image_tag device.image.url, :size => '150x200' %>
         <% else %>
-         <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+         <image src="/assets/default.png" class="rounded img-fluid" alt="NoImage" >
         <% end %>
-        <div><%= link_to device.name, device %></div>
-        <div>いいね！の数 <%= device.liked.count %></div>
-        
-      </li>
+        <div class="device_name"><%= device.name %></div>
+      <% end %>
+        <div>いいね！ <%= device.liked.count %>pt</div>
+      </li>  
     <% end %>
   </ul>
 </div>
 
-<h1>機種一覧</h1>
-<% if admin_user? %>
-  <%= link_to '管理者用新規登録ボタン', new_device_path %>
-<% end %>
-
 <div>
-  <ul class="list-unstyled">
+  <h1>機種一覧</h1>
+</div>
+
+  <ul class="list-unstyled ranking">
     <% @devices.each do |device| %>
-      <li>
-        <% if device.image? %>  
-         <%= image_tag device.image.url, :size => '75x125' %>
-        <% else %>
-         <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+      <li class="ranker">
+        <%= link_to(device) do %> 
+          <% if device.image? %>
+           <%= image_tag device.image.url, :size => '75x100' %>
+          <% else %>
+           <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+          <% end %>
+          <div class="device_name"><%= device.name %></div>
         <% end %>
-        <div><%= link_to device.name, device %></div>
       </li>
     <% end %>
   </ul>
   <%= paginate @devices %>
-</div>
+  
+<% if admin_user? %>
+  <%= link_to '新規登録ボタン', new_device_path, class: 'btn btn-secondary btn-sm' %>
+<% end %>

@@ -1,17 +1,11 @@
-口コミ投稿ページ
+口コミを作成する
+
 <%= form_with(model: @review, local: true) do |f| %>
- <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% @review.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-    <div class="form-group">
-      <%= f.text_area :content, class: 'form-control', rows: 5 %>
-      <%= f.hidden_field :device_id, :value => params[:id] %>
-    </div>
-    <%= f.submit 'Review', class: 'btn btn-primary btn-block' %>
+  <%= render 'layouts/error_messages', model: f.object %>
+ 
+  <div class="form-group">
+    <%= f.text_area :content, class: 'form-control', rows: 5 %>
+    <%= f.hidden_field :device_id, :value => params[:id] %>
+  </div>
+  <%= f.submit '口コミを投稿する', class: 'btn btn-primary btn-block' %>
 <% end %>

@@ -1,60 +1,71 @@
 <div class="row">
   <aside class="col-sm-4">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @device.name %></h3>
-      </div>
-      <div class="card-body">
+    <h3><%= @device.name %></h3>
+    <div class="content">
+      <div class="photo">
         <% if @device.image? %>
-          <%= image_tag @device.image.url, :size => '150x250' %>
+          <%= image_tag @device.image.url, :size => '150x200' %>
         <% else %>
-          <image src="/assets/default.png" class="rounded img-fluid" alt="ユーザーアイコン" >
+          <image src="/assets/default.png" class="rounded img-fluid" alt="device_img" >
         <% end %>
-        <p><%= @device.content %></p>
+        <div class="count_liked">
+          いいね！ <%= @count_liked %>pt
+        </div>
+        <% if logged_in? %>
+          <%= render 'favorites/favorite_botton', device: @device %>
+        <% end %>
       </div>
-      <div class="count_liked">
-        <p>いいね！の数 <%= @count_liked %></p>
+      <div class="device-data">
+        <div class="text">
+        ・メーカー：<%= @device.maker %>
+        </div>
+        <div class="text">
+        ・発売日：<%= @device.on_sale %>
+        </div><div class="text">
+        ・画面サイズ：<%= @device.size %>
+        </div>
+        <div class="text">
+        <%= @device.content %>
+        </div>
       </div>
+    </div>  
       
-    </div>
-    
-    <% if logged_in? %>
-      <%= render 'favorites/favorite_botton', device: @device %>
-    <% end %>
-    <div>
-      
-      <%= link_to("口コミを投稿する", "/devices/#{@device.id}/review") %>
-      
-    </div>
     <% if admin_user? %>
       <ul class="list-unstyled">
-        <li><%= link_to '端末情報を編集', edit_device_path(@device) %></li>
-        <li><%= link_to '端末情報を削除', @device, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }  %></li>
+        <li><%= link_to '端末情報を編集', edit_device_path(@device), class: 'btn btn-secondary btn-sm' %></li>
+        <li><%= link_to '端末情報を削除', @device, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-sm' %></li>
       </ul>
     <% end %>
   </aside>
     
-    <div class="col-sm-8">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">口コミ一覧</a></li>
-    </ul>
-  <ul class="list-unstyled">
-    <% @reviews.each do |review| %>
-      <li class="media">
-        <img class="mr-1 rounded" >
-        <div class="media-body">
-          <div>
-            <%= review.user_id %>: <%= review.content %>: <%= review.device_id %>
-            <ul class="list-unstyled">
-              <li><%= link_to "口コミを編集する", edit_review_path(review) %></li>
-        <li><%= link_to '口コミを削除', review, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }  %></li>
-              </ul>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+  <div class="col-sm-8">
+    <h3>口コミ一覧</h3>
+    <div class='btn btn-outline-primary btn-sm'>
+      <%= link_to("口コミを投稿する", "/devices/#{@device.id}/review") %>
+    </div>
     
-  </div>
+<table class="table table-bordered">
+  <tr>
+    <th>ユーザー名</th>
+    <th>口コミ内容</th>
+  </tr>
+    <% @reviews.each do |review| %>
+  <tr>
+    <th><%=link_to User.find(review.user_id).name, user_path(User.find(review.user_id)) %></th>
+    <td><%= review.content %>
+      <p><% if logged_in? %>
+          <% if current_user.id == review.user_id %> 
+              <%= link_to "編集する", edit_review_path(review), class: 'btn btn-success btn-sm' %>
+              <%= link_to '削除する', review, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-sm'  %>
+          <% end %>
+        <% end %>
+      </p>
+    </td>
+  </tr>
+    <% end %>
+</table>
+<% unless @reviews.present? %>
+  <div class="text-center">口コミはまだありません。</div>
+<% end %>
   </div>
 </div>

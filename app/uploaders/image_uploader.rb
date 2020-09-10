@@ -5,7 +5,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #minimagickをgemでバンドル後
   include CarrierWave::MiniMagick
 
-process :resize_to_fill => [200,200,"center"]
+process :resize_to_fill => [300,300,"center"]
 
 process :convert => 'jpg'
 

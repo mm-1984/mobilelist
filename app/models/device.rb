@@ -1,4 +1,6 @@
 class Device < ApplicationRecord
+  validates :name, presence: true, length: { maximum: 50 }
+  
   has_many :reviews
   has_many :favorites, dependent: :destroy
   has_many :liked, through: :favorites, source: :user

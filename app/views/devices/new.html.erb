@@ -2,29 +2,4 @@
   <h1>端末新規登録</h1>
 </div>
 
-<div class="row">
-  <div class="col-sm-6 offset-sm-3">
-
-    <%= form_with(model: @device, local: true) do |f| %>
-      
-      <div class="form-group">
-        <%= f.label :name, 'Name' %>
-        <%= f.text_field :name, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :image, 'image' %>
-        <%= f.file_field :image %>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :content, '説明' %>
-        <%= f.text_field :content, class: 'form-control' %>
-      </div>
-      
-
-      <%= f.submit '新規登録', class: 'btn btn-primary btn-block' %>
-      
-    <% end %>
-  </div>
-</div>
+<%= render 'form', device: @device %>

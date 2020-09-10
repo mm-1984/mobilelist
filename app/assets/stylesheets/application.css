@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+.ranking {
+    display: flex;
+}
+
+.ranker {
+    flex: 1;
+    text-align: center;
+}
+
+.number {
+    font-size: 25px;
+}
+.device_name {
+    color: black;
+}
