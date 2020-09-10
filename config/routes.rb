@@ -9,8 +9,14 @@ Rails.application.routes.draw do
  
  get 'devices/:id/review', to: 'reviews#new'
  
+ resources :users, only: [:show, :new, :create] do
+        member do
+            get :likes
+        end
+    end
+ 
  resources :devices
  resources :users
  resources :reviews
- 
+ resources :favorites, only: [:create, :destroy]
 end

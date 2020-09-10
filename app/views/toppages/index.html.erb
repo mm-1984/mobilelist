@@ -5,12 +5,24 @@
   </div>
 </div>
 <h1>いいね！ランキング</h1>
-<ul class="list-unstyled">
-  <li>
-    <h2>No.1</h2>
-    <%=  %>
-  </li>
-</ul>
+
+<div>
+  <ul class="list-unstyled">
+    <% @ranking.each.with_index(1) do |device, i| %>
+      <li>
+        No.<%= i %>
+        <% if device.image? %>  
+         <%= image_tag device.image.url, :size => '75x125' %>
+        <% else %>
+         <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+        <% end %>
+        <div><%= link_to device.name, device %></div>
+        <div>いいね！の数 <%= device.liked.count %></div>
+        
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <h1>機種一覧</h1>
 <% if admin_user? %>
@@ -21,16 +33,14 @@
   <ul class="list-unstyled">
     <% @devices.each do |device| %>
       <li>
-        
-      <% if device.image? %>  
-       <%= image_tag device.image.url, :size => '75x125' %>
-      <% else %>
-       <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
-      <% end %>
-      
-        <p><%= link_to device.name, device %></p>
-        <div><%= device.name %></div>
+        <% if device.image? %>  
+         <%= image_tag device.image.url, :size => '75x125' %>
+        <% else %>
+         <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+        <% end %>
+        <div><%= link_to device.name, device %></div>
       </li>
-      <% end %>
+    <% end %>
   </ul>
+  <%= paginate @devices %>
 </div>

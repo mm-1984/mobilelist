@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    
+    @devices = @user.likes
   end
 
   def new
@@ -47,6 +49,11 @@ class UsersController < ApplicationController
     
     flash[:success] = 'ユーザー登録を削除しました'
     redirect_to root_url
+  end
+  
+  def likes
+    @user = User.find(params[:id])
+    @devices = @user.likes
   end
   
   private

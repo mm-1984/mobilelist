@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_091922) do
+ActiveRecord::Schema.define(version: 2020_09_08_045014) do
 
   create_table "devices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 2020_09_07_091922) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "device_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_favorites_on_device_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -40,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_09_07_091922) do
     t.boolean "admin", default: false
   end
 
+  add_foreign_key "favorites", "devices"
+  add_foreign_key "favorites", "users"
   add_foreign_key "reviews", "devices"
   add_foreign_key "reviews", "users"
 end

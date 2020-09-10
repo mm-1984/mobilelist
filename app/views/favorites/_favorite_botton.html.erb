@@ -1,0 +1,11 @@
+<% if current_user.favorite?(device) %>
+  <%= form_with(model: current_user.favorites.find_by(device_id: device.id), local: true, method: :delete) do |f| %>
+    <%= hidden_field_tag :device_id, device.id %>
+    <%= f.submit 'Unfavorite', class: 'btn btn-danger btn-sm' %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+    <%= hidden_field_tag :device_id, device.id %>
+    <%= f.submit 'Favorite', class: 'btn btn-primary btn-sm' %>
+  <% end %>
+<% end %>

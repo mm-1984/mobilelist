@@ -3,28 +3,43 @@ class ReviewsController < ApplicationController
   
   def new
     @review = Review.new
+    @device = Device.find(params[:id])
   end
 
   def create
-    # Review.find_by(device_id: params[:review][:device_id])
     @review = current_user.reviews.build(review_params)
-    if @review_device_id.save
+    if @review.save
       flash[:success] = 'レビューを投稿しました'
       redirect_to root_url
     else
       @reviews = current_user.reviews.order(id: :desc).page(params[:page])
-      flash.now[:danger] = 'レビューの投稿に失敗しました。'
+      flash.now[:danger] = '投稿に失敗しました。'
       render 'reviews/new'
     end
   end
 
   def edit
+    @review = Review.find(params[:id])
+    @device_id = @review.device_id
   end
-
+  
   def update
+    @review = Review.find(params[:id])
+    
+    if @review.update(review_params)
+      flash[:success] = 'レビューを更新しました'
+      redirect_to device_path(@review.device_id)
+    else
+      flash.now[:danger] = '口コミは更新されませんでした'
+      render :edit
+    end
   end
-
+  
   def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    flash[:success] = '口コミを削除しました。'
+    redirect_back(fallback_location: root_path)
   end
   
   private
@@ -32,13 +47,5 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:content, :device_id)
   end
-  
-  def correct_user
-    @review = current_user.reviews.find_by(id: params[:id])
-    unless @review
-      redirect_to root_url
-    end
-  end
-  
   
 end

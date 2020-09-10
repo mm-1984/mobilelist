@@ -18,6 +18,8 @@ class DevicesController < ApplicationController
 
   def show
     @device = Device.find(params[:id])
+    counts(@device)
+    @reviews = Review.where(device_id: @device.id)
   end
 
   def edit
