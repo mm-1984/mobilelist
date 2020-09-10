@@ -51,6 +51,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: message-board_production
-  username: message-board
+  database: mobilelist_production
+  username: mobilelist
   password: <%= ENV['MESSAGE-BOARD_DATABASE_PASSWORD'] %>
