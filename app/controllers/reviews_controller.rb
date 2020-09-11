@@ -15,8 +15,8 @@ class ReviewsController < ApplicationController
       redirect_to device_path(@review.device_id)
     else
       @reviews = current_user.reviews.order(id: :desc).page(params[:page])
-      flash.now[:danger] = '投稿に失敗しました。'
-      render :new
+      flash[:danger] = '投稿に失敗しました。'
+      redirect_to "/devices/#{@review.device_id}/review", flash: { error: @review.errors.full_messages }
     end
   end
 

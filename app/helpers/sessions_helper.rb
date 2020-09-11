@@ -9,7 +9,8 @@ module SessionsHelper
   
   def correct_user?
     unless @current_user == User.find(params[:id])
-      redirect_to login_url
+      flash[:danger] = '不正なアクセスです'
+      redirect_to root_url
     end
   end
   

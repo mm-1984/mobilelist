@@ -1,15 +1,13 @@
-
-<div class="ranking-wrapper">
-  <h1>いいね！ランキング</h1>
+<h1>いいね！ランキング</h1>
   <ul class="list-unstyled ranking">
     <% @ranking.each.with_index(1) do |device, i| %>
       <li class="ranker">
         <div class="number">No.<%= i %></div>
       <%= link_to(device) do %>
         <% if device.image? %>  
-         <%= image_tag device.image.url, :size => '150x200' %>
+         <%= image_tag device.image.url, :size => '150x200', alt: 'userimage' %>
         <% else %>
-         <image src="/assets/default.png" class="rounded img-fluid" alt="NoImage" >
+         <img src="/assets/default.png" class="rounded img-fluid" alt="NoImage" >
         <% end %>
         <div class="device_name"><%= device.name %></div>
       <% end %>
@@ -17,7 +15,6 @@
       </li>  
     <% end %>
   </ul>
-</div>
 
 <div>
   <h1>機種一覧</h1>
@@ -28,7 +25,7 @@
       <li class="ranker">
         <%= link_to(device) do %> 
           <% if device.image? %>
-           <%= image_tag device.image.url, :size => '75x100' %>
+           <%= image_tag device.image.url, :size => '75x100', alt: 'deviceimage' %>
           <% else %>
            <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
           <% end %>

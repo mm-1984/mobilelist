@@ -6,7 +6,7 @@
         <% if @device.image? %>
           <%= image_tag @device.image.url, :size => '150x200' %>
         <% else %>
-          <image src="/assets/default.png" class="rounded img-fluid" alt="device_img" >
+          <img src="/assets/default.png" class="rounded img-fluid" alt="device_img" >
         <% end %>
         <div class="count_liked">
           いいね！ <%= @count_liked %>pt
