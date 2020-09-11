@@ -27,12 +27,11 @@ class DevicesController < ApplicationController
   end
 
   def update
-
     if @device.update(device_params)
       flash[:success] = '端末情報を編集しました'
       redirect_to @device
     else
-      flash[:danger] = '編集できませんでした'
+      flash[:danger] = '端末情報を編集できませんでした'
       render :edit
     end
   end

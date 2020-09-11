@@ -25,13 +25,12 @@ class ReviewsController < ApplicationController
   end
   
   def update
-
     if @review.update(review_params)
       flash[:success] = 'レビューを更新しました'
       redirect_to device_path(@review.device_id)
     else
-      flash.now[:danger] = '口コミは更新されませんでした'
-      render :edit
+      flash[:danger] = '口コミは更新されませんでした'
+      redirect_to "/reviews/#{@review.id}/edit", flash: { error: @review.errors.full_messages }
     end
   end
   
