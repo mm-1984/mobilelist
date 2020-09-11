@@ -4,38 +4,38 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.production?
-    storage :fog
-  else
+  # if Rails.env.production?
+    # storage :fog
+  # else
     storage :file
-  end
+  # end
   
-  if Rails.env.production?
-    CarrierWave.configure do |config|
-      config.fog_credentials = {
+  # if Rails.env.production?
+    # CarrierWave.configure do |config|
+      # config.fog_credentials = {
         # Amazon S3用の設定
-        :provider              => 'AWS',
-        :region                => ENV['ap-northeast-1'],  # S3に設定したリージョン。
-        :aws_access_key_id     => ENV['AKIAU3BF4RKXQFLFNMHQ'],
-        :aws_secret_access_key => ENV['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']
-      }
-      config.fog_directory     =  ENV['mobile-image-box']
-    end
-  end
+        # :provider              => 'AWS',
+        # :region                => ENV['ap-northeast-1'],  # S3に設定したリージョン。
+        # :aws_access_key_id     => ENV['AKIAU3BF4RKXQFLFNMHQ'],
+        # :aws_secret_access_key => ENV['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']
+      # }
+      # config.fog_directory     =  ENV['mobile-image-box']
+    # end
+  # end
   
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+  # def store_dir
+    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  # end
   
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url(*args)
+  # def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:
-   ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  end
+  # end
 
   # Process files as they are uploaded:
   # process scale: [100, 100]
