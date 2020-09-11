@@ -58,10 +58,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
-  def correct_user
-    @user = current_user.microposts.find_by(id: params[:id])
-    unless @micropost
-      redirect_to root_url
-    end
-  end
 end

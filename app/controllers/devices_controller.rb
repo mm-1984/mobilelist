@@ -1,5 +1,6 @@
 class DevicesController < ApplicationController
   before_action :device_find, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user_only, only: [:new, :create, :edit, :update, :destroy]
   
   def new
     @device = Device.new
@@ -20,7 +21,6 @@ class DevicesController < ApplicationController
   def show
     counts(@device)
     @reviews = Review.where(device_id: @device.id)
-    
   end
 
   def edit
@@ -50,5 +50,11 @@ class DevicesController < ApplicationController
   
   def device_find
     @device = Device.find(params[:id])
+  end
+  
+  def admin_user_only
+    unless admin_user?
+      redirect_to login_url
+    end
   end
 end
