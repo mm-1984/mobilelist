@@ -1,0 +1,232 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+:root {
+    --main-color: #402414;
+    --accent-color: #D9C3A9;
+    --dark-main-color: #0D0000;
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+
+// <---   header   ---> //
+header {
+    // position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: var(--main-color);
+    background-color: #402414;
+    // opacity: 0.8;
+}
+.header-logo a {
+    display: inline-block;
+    line-height: 45px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: var(--accent-color);
+    font-size: 30px;
+    text-decoration: none;
+}
+
+
+.headB ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+}
+
+.headB a {
+    display: block;
+    padding: 10px;
+    color: var(--accent-color);
+    font-size: 20px;
+    text-decoration: none;
+}
+.login-user {
+    color: black;
+}
+
+    // header 小さい画面用の設定 //
+@media (max-width: 767px) {
+    .header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    }
+    
+    .headC:hover {
+    opacity: 0.3;
+    }
+    .headC {
+    margin-right: 10px;
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 28px;
+    opacity: 0.9;
+    cursor: pointer;
+    color: var(--accent-color);
+    }
+    .headB {
+        display: none;
+        text-align: right;
+    }
+}
+
+// header 大きい画面用の設定 //
+@media (min-width: 768px) {
+    .header-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .headB ul {
+        display: flex;
+    }
+    .headC {
+        display: none;
+    }
+    .headB {
+        display: block !important;
+    }
+}
+
+ 
+// <------   Toppage/index   ------> //
+.top {
+    display: flex;
+    height: 100px;
+    // background-image: image-url('image001.jpeg');
+    // background-size:cover;
+    // background-color: var(--dark-main-color);
+    color: var(--main-color);
+    align-items: center;
+    justify-content: center;
+}
+.main-logo {
+    display: block;
+}
+.top h1 {
+    font-size: 3vw;
+}
+
+.ranking {
+    margin: 30px 50px;
+}
+
+.ranker {
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    // padding-top: 10px;
+    // padding-bottom: 10px;
+    margin: 0 10px;
+    border: solid 2px #ddd;
+    display: flex;
+}
+.ranker .image {
+    vertical-align: middle;
+    text-align: center;
+    flex: 1;
+}
+.ranker .info {
+    flex: 3;
+    padding-right: 15px;
+    text-decoration: none;
+}
+.number {
+    font-size: 30px;
+    color: red;
+}
+.device_name {
+    color: black;
+}
+// <---   Toppage 大きい画面用   --->//
+@media (min-width: 768px) {
+    .ranking {
+        display: flex;
+    }
+    .ranker {
+        flex: 1;
+    }
+}
+
+// <------   機種一覧   ------> //
+.index {
+    width: 100%;
+    margin: 0 auto;
+}
+.index-wrapper {
+    // display: flex;
+    // flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 10px auto;
+}
+article {
+    // flex: 1 1 300px;
+    height: 130px;
+    border: solid 1px #ddd;
+    display: flex;
+    max-width: 300px;
+    
+}
+
+.index .image{
+    flex: 1;
+    margin: auto;
+    padding-left: 10px;
+}
+.index .text {
+    flex: 4;
+    width: 180px;
+    margin-top: 40px;
+}
+.device_info {
+    color: black;
+}
+// <---   機種一覧：画面大   --->//
+@media(min-width: 768px) {
+    .index {
+        
+    }
+    .index-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    article {
+        flex: 1 1 250px;
+    }
+}
+// <---   機種一覧：画面小   --->//
+@media(max-width: 767px) {
+    .index-wrapper {
+        width: 100%;
+    }
+    article {
+        margin: 0 auto;
+    }
+}
+// <------   device-show   ------>
+.device-show {
+    margin-left: 50px;
+    margin-right: 50px;
+}

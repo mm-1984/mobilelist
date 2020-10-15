@@ -1,26 +1,25 @@
-<header class="mb-4">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Mobile List</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav">
+<header>
+  <div class="header-wrapper">
+     
+    <div class="header-logo">
+      <a><%= link_to 'Mobile List', root_path %></a>
+      
+      <button type="button" class="headC">
+        <span class="fa fa-bars" title="menu"></span>
+      </button>
+    </div>
+    
+    <nav class="headB">
+      <ul>
         <% if logged_in? %>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to 'My profile', user_path(current_user) %></li>
-              <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'Logout', logout_path, method: :delete %></li>
-            </ul>
-          </li>
+          <a><%= link_to current_user.name, user_path(current_user) %></a>
+          <a><%= link_to 'Logout', logout_path, method: :delete %></a>
         <% else %>
-        <li class="nav-item"><%= link_to 'signup', signup_path, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'Login', login_path, class: 'nav-link' %></li>
+          <a><%= link_to 'signup', signup_path %></a>
+          <a><%= link_to 'Login', login_path %></a>
         <% end %>
       </ul>
-    </div>
-  </nav>
+    </nav>
+
+  </div>
 </header>

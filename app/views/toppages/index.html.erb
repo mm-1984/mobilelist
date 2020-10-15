@@ -1,40 +1,58 @@
-<h1>いいね！ランキング</h1>
-  <ul class="list-unstyled ranking">
-    <% @ranking.each.with_index(1) do |device, i| %>
-      <li class="ranker">
-        <div class="number">No.<%= i %></div>
-      <%= link_to(device) do %>
-        <% if device.image? %>  
-         <%= image_tag device.image.url, :size => '150x200', alt: 'userimage' %>
-        <% else %>
-         <img src="/assets/default.png" class="rounded img-fluid" alt="NoImage" >
-        <% end %>
-        <div class="device_name"><%= device.name %></div>
-      <% end %>
-        <div>いいね！ <%= device.liked.count %>pt</div>
-      </li>  
-    <% end %>
-  </ul>
-
-<div>
-  <h1>機種一覧</h1>
+<div class="top">
+  <div class="main-logo">
+    <h1>SmartPhone紹介サイト</h1>
+  </div>
 </div>
 
-  <ul class="list-unstyled ranking">
-    <% @devices.each do |device| %>
-      <li class="ranker">
-        <%= link_to(device) do %> 
-          <% if device.image? %>
-           <%= image_tag device.image.url, :size => '75x100', alt: 'deviceimage' %>
+  <div class="ranking">
+    <% @ranking.each.with_index(1) do |device, i| %>
+    <div class="ranker">
+      <div class="image">
+        <%= link_to(device) do %>
+          <% if device.image? %>  
+           <%= image_tag device.image.url, :size => '120x175', alt: 'deviceimage' %>
           <% else %>
-           <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+           <img src="/assets/default.png" class="rounded img-fluid" alt="NoImage" >
           <% end %>
-          <div class="device_name"><%= device.name %></div>
+      </div>
+      
+      <div class="info">
+        <div class="number">No.<%= i %></div>
+        <div class="device_info"><%= device.name %></div>
+        <div class="device_info"><%= device.maker %></div>
+        <div class="device_info">Like！ <%= device.liked.count %>pt</div>
+      </div>
         <% end %>
-      </li>
+    </div>  
     <% end %>
-  </ul>
-  <%= paginate @devices %>
+  </div>
+
+
+
+<section class="index">
+  <div class="index-wrapper">
+    <% @devices.each do |device| %>
+      <article>
+        
+          <div class="image">
+            <%= link_to(device) do %> 
+              <% if device.image? %>
+               <%= image_tag device.image.url, :size => '75x100', alt: 'deviceimage' %>
+              <% else %>
+               <image src="/assets/default.png" class="rounded img-fluid" alt="端末画像" >
+              <% end %>
+          </div>
+        
+          <div class="text">
+            <div class="device_name"><%= device.name %></div>
+            <div class="device_name"><%= device.maker %></div>
+          </div>
+        
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+</section> 
   
 <% if admin_user? %>
   <%= link_to '新規登録ボタン', new_device_path, class: 'btn btn-secondary btn-sm' %>
