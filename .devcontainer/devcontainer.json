@@ -1,0 +1,14 @@
+{
+  "name": "mobilelist",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [ 3000, 5432 ],
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends imagemagick libpq-dev && gem install bundler && bundle install",
+  "postStartCommand": "bin/rails db:prepare",
+  "customizations": {
+    "vscode": {
+      "extensions": [ "Shopify.ruby-lsp" ]
+    }
+  }
+}

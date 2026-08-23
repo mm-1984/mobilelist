@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: mobilelist
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mobilelist-db
+          property: connectionString
+      - key: CLOUDINARY_URL
+        sync: false
+
+databases:
+  - name: mobilelist-db
+    plan: free

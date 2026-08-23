@@ -1,19 +1,19 @@
-<header>
+<header data-controller="navbar">
   <div class="header-wrapper">
-     
+
     <div class="header-logo">
       <a><%= link_to 'Mobile List', root_path %></a>
-      
-      <button type="button" class="headC">
+
+      <button type="button" class="headC" data-action="navbar#toggle">
         <span class="fa fa-bars" title="menu"></span>
       </button>
     </div>
-    
-    <nav class="headB">
+
+    <nav class="headB" data-navbar-target="menu">
       <ul>
         <% if logged_in? %>
           <a><%= link_to current_user.name, user_path(current_user) %></a>
-          <a><%= link_to 'Logout', logout_path, method: :delete %></a>
+          <a><%= link_to 'Logout', logout_path, data: { turbo_method: :delete } %></a>
         <% else %>
           <a><%= link_to 'signup', signup_path %></a>
           <a><%= link_to 'Login', login_path %></a>

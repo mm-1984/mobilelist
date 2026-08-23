@@ -6,14 +6,14 @@ module SessionsHelper
   def logged_in?
     !!current_user
   end
-  
+
   def correct_user?
     unless @current_user == User.find(params[:id])
-      flash[:danger] = '不正なアクセスです'
+      flash[:danger] = "\u4E0D\u6B63\u306A\u30A2\u30AF\u30BB\u30B9\u3067\u3059"
       redirect_to root_url
     end
   end
-  
+
   def review_user?
     @review = Review.find(params[:id])
     unless @current_user.id == @review.user_id

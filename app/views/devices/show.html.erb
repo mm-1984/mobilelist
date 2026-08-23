@@ -34,7 +34,7 @@
     <% if admin_user? %>
       <ul class="list-unstyled">
         <li><%= link_to '端末情報を編集', edit_device_path(@device), class: 'btn btn-secondary btn-sm' %></li>
-        <li><%= link_to '端末情報を削除', @device, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-sm' %></li>
+        <li><%= link_to '端末情報を削除', @device, data: { turbo_method: :delete, turbo_confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-sm' %></li>
       </ul>
     <% end %>
   </aside>
@@ -55,7 +55,7 @@
       <p><% if logged_in? %>
           <% if current_user.id == review.user_id %> 
               <%= link_to "編集する", edit_review_path(review), class: 'btn btn-success btn-sm' %>
-              <%= link_to '削除する', review, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-sm'  %>
+              <%= link_to '削除する', review, data: { turbo_method: :delete, turbo_confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger btn-sm'  %>
           <% end %>
         <% end %>
       </p>
