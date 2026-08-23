@@ -17,6 +17,11 @@ Rails.application.configure do
   # Enable server timing.
   config.server_timing = true
 
+  # Allow requests coming through GitHub Codespaces' forwarded-port domains
+  # (e.g. https://xxxx-3000.app.github.dev), which Rails' Host Authorization
+  # blocks by default since it isn't localhost/a private IP.
+  config.hosts << /.*\.app\.github\.dev/
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
