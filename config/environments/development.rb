@@ -22,6 +22,12 @@ Rails.application.configure do
   # blocks by default since it isn't localhost/a private IP.
   config.hosts << /.*\.app\.github\.dev/
 
+  # Codespaces' forwarding proxy passes through requests with an Origin header
+  # of http://localhost:3000 (the container's internal address) instead of the
+  # public *.app.github.dev URL, which fails Rails' Origin/Host CSRF check.
+  # Safe to disable in development only; production still enforces it.
+  config.action_controller.forgery_protection_origin_check = false
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
